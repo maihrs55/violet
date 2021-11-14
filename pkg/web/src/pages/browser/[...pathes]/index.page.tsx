@@ -39,7 +39,7 @@ const ProjectPage = () => {
         messages:
           projectApiData.messages?.filter((message) => p.messageIds?.includes(message.id)) ?? [],
       })) ?? [],
-    [projectApiData]
+    [projectApiData?.revisions, projectApiData?.messages, currentProject?.openedTabId]
   )
 
   if (!projectApiData || !currentProject) return <Fetching error={error} />

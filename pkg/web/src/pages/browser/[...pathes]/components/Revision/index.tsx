@@ -85,11 +85,8 @@ export const Revision = (props: {
     await api.browser.works
       ._workId(props.workId)
       .revisions.$post({ body: { uploadFile: file, projectId: props.projectId } })
-      .catch(onErr)
 
     const revisionRes = await api.browser.works._workId(props.workId).revisions.$get()
-
-    if (!revisionRes) return
 
     updateApiWholeData(
       'revisionsList',

@@ -58,7 +58,7 @@ export const useFetch = (
           )
         : [...apiWholeData.revisionsList, revisionsData]
     )
-  }, [revisionsRes.data])
+  }, [revisionsRes.data, currentProject?.openedTabId])
 
   useEffect(() => {
     const messageRes = async () => {

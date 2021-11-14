@@ -101,11 +101,9 @@ export const StreamBar = (props: {
 
       updateApiWholeData(
         'messagesList',
-        apiWholeData.messagesList.some((d) => d.revisionId === messageRes.revisionId)
-          ? apiWholeData.messagesList.map((m) =>
-              m.revisionId === messageRes.revisionId ? messageRes : m
-            )
-          : [...apiWholeData.messagesList, messageRes]
+        apiWholeData.messagesList.map((m) =>
+          m.revisionId === messageRes.revisionId ? messageRes : m
+        )
       )
     },
     [content]
