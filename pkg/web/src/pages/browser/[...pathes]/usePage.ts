@@ -87,11 +87,7 @@ export const usePage = () => {
     const revisions = apiWholeData.revisionsList.find(
       (d) => d.workId === currentProject.openedTabId
     )?.revisions
-
-    const messages = apiWholeData.messagesList
-      .filter((m) => revisions?.some((revision) => revision.id === m.revisionId))
-      ?.flatMap((m) => m.messages)
-
+    const messages = apiWholeData.messagesList.flatMap((m) => m.messages)
     return (
       data &&
       desks && {

@@ -58,6 +58,12 @@ export const StreamBar = (props: {
       .post({ body: { content, userName } })
       .catch(onErr)
 
+    const revisionRess = await api.browser.works._workId(props.workId).revisions.$get()
+    updateApiWholeData(
+      'revisionsList',
+      apiWholeData.revisionsList.map((r) => (r.workId === revisionRess.workId ? revisionRess : r))
+    )
+
     const messageRes = await api.browser.works
       ._workId(props.workId)
       .revisions._revisionId(props.revision.id)
@@ -90,9 +96,6 @@ export const StreamBar = (props: {
         ._workId(props.workId)
         .revisions._revisionId(props.revision.id)
         .messages.$get()
-        .catch(onErr)
-
-      if (!replyRes) return
 
       updateApiWholeData(
         'messagesList',
