@@ -58,7 +58,6 @@ export const useFetch = (
           )
         : [...apiWholeData.revisionsList, revisionsData]
     )
-    updateMessage(revisionsData)
   }, [revisionsRes.data])
 
   useEffect(() => {

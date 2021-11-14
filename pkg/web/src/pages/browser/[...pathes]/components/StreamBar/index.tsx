@@ -71,9 +71,11 @@ export const StreamBar = (props: {
 
     updateApiWholeData(
       'messagesList',
-      apiWholeData.messagesList.map((m) =>
-        m.revisionId === messageRes.revisionId ? messageRes : m
-      )
+      apiWholeData.messagesList.some((d) => d.revisionId === messageRes.revisionId)
+        ? apiWholeData.messagesList.map((m) =>
+            m.revisionId === messageRes.revisionId ? messageRes : m
+          )
+        : [...apiWholeData.messagesList, messageRes]
     )
 
     setContent('')
@@ -92,14 +94,18 @@ export const StreamBar = (props: {
         .messages._messageId(messageId)
         .replies.post({ body: { content, userName } })
 
-      const replyRes = await api.browser.works
+      const messageRes = await api.browser.works
         ._workId(props.workId)
         .revisions._revisionId(props.revision.id)
         .messages.$get()
 
       updateApiWholeData(
         'messagesList',
-        apiWholeData.messagesList.map((m) => (m.revisionId === replyRes.revisionId ? replyRes : m))
+        apiWholeData.messagesList.some((d) => d.revisionId === messageRes.revisionId)
+          ? apiWholeData.messagesList.map((m) =>
+              m.revisionId === messageRes.revisionId ? messageRes : m
+            )
+          : [...apiWholeData.messagesList, messageRes]
       )
     },
     [content]
